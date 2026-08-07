@@ -1,0 +1,26 @@
+# Environment variables
+.env
+*.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+backend/.env
+
+.env
+*.env
+
+venv/
+backend/venv/
+
+node_modules/
+__pycache__/
