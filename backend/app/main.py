@@ -3,11 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import Base, engine
 
-# Models
 from app.models.user import User
 from app.models.contract import Contract
 
-# Routers
 from app.routers.auth import router as auth_router
 from app.routers.ai import router as ai_router
 from app.routers.contracts import router as contracts_router
@@ -24,8 +22,8 @@ app = FastAPI(
 # DATABASE
 # =========================================================
 
-# Create tables if they don't already exist.
-# IMPORTANT: Do NOT use drop_all() in production.
+# TEMPORARY DEVELOPMENT ONLY
+# Do NOT use drop_all() in production because it deletes data.
 Base.metadata.create_all(bind=engine)
 
 
@@ -35,15 +33,19 @@ Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
+
     allow_origins=[
-        # Local development
+        # Local frontend
         "http://localhost:5173",
 
-        # Vercel production frontend
-        "https://contract-lens-3c7l-phhe3pdji-machagirimudhiraj39-3571s-projects.vercel.app",
+        # Vercel frontend
+        "https://contract-lens-3c7l-ogc1ap8q9-machagirimudhiraj39-3571s-projects.vercel.app",
     ],
+
     allow_credentials=True,
+
     allow_methods=["*"],
+
     allow_headers=["*"],
 )
 
@@ -67,4 +69,3 @@ def root():
     return {
         "message": "ContractLens Backend Running 🚀"
     }
-    
