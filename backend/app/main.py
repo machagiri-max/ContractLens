@@ -22,8 +22,8 @@ app = FastAPI(
 # DATABASE
 # =========================================================
 
-# TEMPORARY DEVELOPMENT ONLY
-# Do NOT use drop_all() in production because it deletes data.
+# DO NOT use drop_all() in production.
+# It deletes your database tables every time Render restarts.
 Base.metadata.create_all(bind=engine)
 
 
@@ -35,17 +35,15 @@ app.add_middleware(
     CORSMiddleware,
 
     allow_origins=[
-        # Local frontend
+        # Local development
         "http://localhost:5173",
 
-        # Vercel frontend
-        "https://contract-lens-3c7l-ogc1ap8q9-machagirimudhiraj39-3571s-projects.vercel.app",
+        # Vercel production
+        "https://contract-lens-3c7l-g7zgnnlob-machagirimudhiraj39-3571s-projects.vercel.app",
     ],
 
     allow_credentials=True,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
 )
 
