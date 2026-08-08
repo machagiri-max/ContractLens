@@ -15,4 +15,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = int(
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-GROQ_MODEL = os.getenv("GROQ_MODEL")
+GROQ_MODEL = os.getenv(
+    "GROQ_MODEL",
+    "llama-3.3-70b-versatile"
+)
