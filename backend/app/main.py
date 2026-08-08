@@ -15,13 +15,15 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Temporary (only for development)
-Base.metadata.drop_all(bind=engine)
+# Create tables if they don't exist
 Base.metadata.create_all(bind=engine)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://contract-lens-3c7l-phhe3pdji-machagirimudhiraj39-3571s-projects.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,8 +34,10 @@ app.include_router(ai_router)
 app.include_router(contracts_router)
 app.include_router(chat_router)
 
+
 @app.get("/")
 def root():
     return {
         "message": "ContractLens Backend Running 🚀"
     }
+    
