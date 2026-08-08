@@ -18,49 +18,32 @@ app = FastAPI(
 )
 
 
-# =========================================================
-# DATABASE
-# =========================================================
-
-# DO NOT use drop_all() in production.
-# It deletes your database tables every time Render restarts.
+# Create database tables
+# DO NOT use drop_all() in production
 Base.metadata.create_all(bind=engine)
 
 
-# =========================================================
 # CORS
-# =========================================================
-
 app.add_middleware(
     CORSMiddleware,
-
     allow_origins=[
-        # Local development
         "http://localhost:5173",
 
-        # Vercel production
-        "https://contract-lens-3c7l-g7zgnnlob-machagirimudhiraj39-3571s-projects.vercel.app",
+        # NEW VERCEL FRONTEND
+        "https://contract-lens-weld.vercel.app",
     ],
-
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-# =========================================================
-# ROUTERS
-# =========================================================
-
+# Routers
 app.include_router(auth_router)
 app.include_router(ai_router)
 app.include_router(contracts_router)
 app.include_router(chat_router)
 
-
-# =========================================================
-# ROOT
-# =========================================================
 
 @app.get("/")
 def root():
