@@ -21,10 +21,11 @@ class Contract(Base):
 
     owner_id = Column(
         Integer,
-        ForeignKey("users.id")
+        ForeignKey("users.id"),
+        nullable=False
     )
 
     owner = relationship(
-    "User",
-    back_populates="contracts"
-)
+        "User",
+        back_populates="contracts"
+    )
